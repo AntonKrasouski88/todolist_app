@@ -1,7 +1,7 @@
 import React from 'react';
 
 type TaskProps = {
-    taskId: string,
+    taskId: number,
     title: string,
     isDone: boolean,
 }
