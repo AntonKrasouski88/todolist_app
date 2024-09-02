@@ -6,13 +6,15 @@ import {Button} from "./Button";
 
 type TodolistProps = {
     title: string,
-    tasks: Array<TaskType>
+    tasks: Array<TaskType>,
+    removeTask: (taskId: number) => void,
+
 }
 
-export const Todolist = ({title, tasks}: TodolistProps) => {
+export const Todolist = ({title, tasks, removeTask}: TodolistProps) => {
     //Returns a list of tasks
     const tasksList = tasks.length > 0 ? tasks.map(task => {
-        return <Task taskId={task.id} title={task.title} isDone={task.isDone}/>
+        return <Task taskId={task.id} title={task.title} isDone={task.isDone} removeTask={removeTask}/>
     }) : <div>No tasks</div>
 
     return (
