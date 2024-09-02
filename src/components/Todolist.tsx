@@ -2,6 +2,7 @@ import React from 'react';
 import { TaskType } from '../App';
 import {TodolistHeader} from "./TodolistHeader";
 import {Task} from "./Task";
+import {Button} from "./Button";
 
 type TodolistProps = {
     title: string,
@@ -19,15 +20,15 @@ export const Todolist = ({title, tasks}: TodolistProps) => {
             <TodolistHeader title={title}/>
             <div>
                 <input placeholder={"Task name"}/>
-                <button>+</button>
+                <Button title={"+"}/>
             </div>
             <ul>
                 {tasksList}
             </ul>
             <div>
-                <button>All</button>
-                <button>Active</button>
-                <button>Completed</button>
+                <Button title={"All"}/>
+                <Button title={"Active"}/>
+                <Button title={"Completed"}/>
             </div>
         </div>
     );
