@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent,KeyboardEvent, useState} from 'react';
 import {Button} from "./Button";
 
 type AddTaskFormProps = {
@@ -7,23 +7,22 @@ type AddTaskFormProps = {
 
 export const AddTaskForm = ({addTask}: AddTaskFormProps) => {
     const [taskText, setTaskText] = useState<string>('');
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.currentTarget.value.length < 30) {
-            setTaskText(e.target.value)
-        }
-    }
 
-    const onAddTask = (task: string) => {
-        if(task.trim()) {
-            addTask(task.trim());
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => setTaskText(e.target.value);
+
+    const onKeyHandler =(e: KeyboardEvent<HTMLInputElement>) =>e.key === 'Enter' && onAddTask();
+
+    const onAddTask = () => {
+        if(taskText.trim() && taskText.trim().length  < 30) {
+            addTask(taskText.trim());
             setTaskText('')
         }
     }
 
     return (
         <div>
-            <input value={taskText} placeholder={"Task name"} onChange={onChangeHandler}/>
-            <Button title={"+"} onClick={() => onAddTask(taskText)}/>
+            <input value={taskText} placeholder={"Task name"} onChange={onChangeHandler} onKeyUp ={onKeyHandler}/>
+            <Button title={"+"} onClick={onAddTask} />
         </div>
     );
 };
