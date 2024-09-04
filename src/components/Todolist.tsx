@@ -3,16 +3,17 @@ import {FilterType, TaskType} from '../App';
 import {TodolistHeader} from "./TodolistHeader";
 import {Task} from "./Task";
 import {Button} from "./Button";
+import {AddTaskForm} from "./AddTaskForm";
 
 type TodolistProps = {
     title: string,
     tasks: Array<TaskType>,
-    removeTask: (taskId: number) => void,
+    removeTask: (taskId: string) => void,
     changeFilter: (filter: FilterType) => void,
-
+    addTask: (title: string) => void,
 }
 
-export const Todolist = ({title, tasks, removeTask, changeFilter}: TodolistProps) => {
+export const Todolist = ({title, tasks, removeTask, changeFilter, addTask}: TodolistProps) => {
     //Returns a list of tasks
     const tasksList = tasks.length > 0 ? tasks.map(task => {
         return <Task taskId={task.id} title={task.title} isDone={task.isDone} removeTask={removeTask}/>
@@ -21,10 +22,7 @@ export const Todolist = ({title, tasks, removeTask, changeFilter}: TodolistProps
     return (
         <div>
             <TodolistHeader title={title}/>
-            <div>
-                <input placeholder={"Task name"}/>
-                <Button title={"+"}/>
-            </div>
+            <AddTaskForm addTask={addTask}/>
             <ul>
                 {tasksList}
             </ul>

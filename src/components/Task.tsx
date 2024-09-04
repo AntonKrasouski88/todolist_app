@@ -2,10 +2,10 @@ import React from 'react';
 import {Button} from "./Button";
 
 type TaskProps = {
-    taskId: number,
+    taskId: string,
     title: string,
     isDone: boolean,
-    removeTask: (taskId: number) => void,
+    removeTask: (taskId: string) => void,
 }
 
 export const Task = ({taskId, title, isDone, removeTask}: TaskProps) => {
