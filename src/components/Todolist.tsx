@@ -8,22 +8,29 @@ import {TasksList} from "./TasksList";
 type TodolistProps = {
     title: string,
     tasks: Array<TaskType>,
+    filter: FilterType,
     removeTask: (taskId: string) => void,
     changeFilter: (filter: FilterType) => void,
     addTask: (title: string) => void,
     changeTaskStatus: (taskId: string, statusTask: boolean) => void,
 }
 
-export const Todolist = ({title, tasks, removeTask, changeFilter, addTask, changeTaskStatus}: TodolistProps) => {
+export const Todolist = ({title, tasks, removeTask, changeFilter, addTask, changeTaskStatus, filter}: TodolistProps) => {
     return (
-        <div>
+        <div className={'todolist-wrapper'}>
             <TodolistHeader title={title}/>
             <AddTaskForm addTask={addTask}/>
             <TasksList tasks={tasks} removeTask={removeTask} changeTaskStatus={changeTaskStatus}/>
-            <div>
-                <Button title={"All"} onClick={() => changeFilter("all")}/>
-                <Button title={"Active"} onClick={() => changeFilter("active")}/>
-                <Button title={"Completed"} onClick={() => changeFilter("completed")}/>
+            <div className={'btn-block'}>
+                <Button title={"All"}
+                        onClick={() => changeFilter("all")}
+                        style={filter === 'all' ? 'active-filter': 'todo-btn-filter'}/>
+                <Button title={"Active"}
+                        onClick={() => changeFilter("active")}
+                        style={filter === 'active' ? 'active-filter': 'todo-btn-filter'}/>
+                <Button title={"Completed"}
+                        onClick={() => changeFilter("completed")}
+                        style={filter === 'completed' ? 'active-filter': 'todo-btn-filter'}/>
             </div>
         </div>
     );

@@ -26,10 +26,10 @@ export const AddTaskForm = ({addTask}: AddTaskFormProps) => {
     }
 
     return (
-        <div>
+        <div className={'todo-form'}>
             <input value={taskText}
-                   placeholder={"Task name"}
-                   className={error ? 'error': ''}
+                   placeholder={"What is the task today?"}
+                   className={error ? 'error': 'todo-input'}
                    onChange={onChangeHandler}
                    onKeyUp ={onKeyHandler}/>
             <Button title={"+"} onClick={onAddTask} />

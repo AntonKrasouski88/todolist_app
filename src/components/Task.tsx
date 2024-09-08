@@ -15,9 +15,11 @@ export const Task = ({taskId, title, isDone, removeTask, changeTaskStatus}: Task
     }
 
     return (
-        <li key={taskId}>
-            <input type="checkbox" checked={isDone} onChange={changeTaskStatusHandler}/>
-            <span>{title}</span>
+        <li key={taskId}  className={'task'}>
+            <input type="checkbox"
+                   checked={isDone}
+                   onChange={changeTaskStatusHandler}/>
+            <span className={isDone ? 'is-done' : ''}>{title}</span>
             <Button title={'X'} onClick={() =>removeTask(taskId)}/>
         </li>
     );

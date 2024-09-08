@@ -19,7 +19,7 @@ export const TasksList = ({tasks, removeTask, changeTaskStatus}: TasksListProps)
     }) : <div>No tasks</div>
 
     return (
-        <ul>
+        <ul className={'tasks-list'}>
             {tasksList}
         </ul>
     );
