@@ -2,10 +2,11 @@ import React, {ChangeEvent,KeyboardEvent, useState} from 'react';
 import {Button} from "./Button";
 
 type AddTaskFormProps = {
-    addTask: (task: string) => void;
+    todolistId: string,
+    addTask: (task: string, todolistId: string) => void;
 }
 
-export const AddTaskForm = ({addTask}: AddTaskFormProps) => {
+export const AddTaskForm = ({todolistId ,addTask}: AddTaskFormProps) => {
     const [taskText, setTaskText] = useState<string>('');
 
     const [error, setError] = useState<string | null>(null);
@@ -18,7 +19,7 @@ export const AddTaskForm = ({addTask}: AddTaskFormProps) => {
 
     const onAddTask = () => {
         if(taskText.trim() && taskText.trim().length  < 30) {
-            addTask(taskText.trim());
+            addTask(todolistId, taskText.trim());
             setTaskText('')
         } else {
             setError('Title is required')

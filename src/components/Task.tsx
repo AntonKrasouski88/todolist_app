@@ -2,16 +2,17 @@ import React, {ChangeEvent} from 'react';
 import {Button} from "./Button";
 
 type TaskProps = {
+    todolistId: string
     taskId: string,
     title: string,
     isDone: boolean,
-    removeTask: (taskId: string) => void,
-    changeTaskStatus: (taskId: string, statusTask: boolean) => void,
+    removeTask: (taskId: string, todolistId: string) => void,
+    changeTaskStatus: (taskId: string, statusTask: boolean, todolistId: string) => void,
 }
 
-export const Task = ({taskId, title, isDone, removeTask, changeTaskStatus}: TaskProps) => {
+export const Task = ({todolistId, taskId, title, isDone, removeTask, changeTaskStatus}: TaskProps) => {
     const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        changeTaskStatus(taskId, e.currentTarget.checked)
+        changeTaskStatus(taskId, e.currentTarget.checked, todolistId)
     }
 
     return (
@@ -20,7 +21,7 @@ export const Task = ({taskId, title, isDone, removeTask, changeTaskStatus}: Task
                    checked={isDone}
                    onChange={changeTaskStatusHandler}/>
             <span className={isDone ? 'is-done' : ''}>{title}</span>
-            <Button title={'X'} onClick={() =>removeTask(taskId)}/>
+            <Button title={'X'} onClick={() =>removeTask(taskId, todolistId)}/>
         </li>
     );
 };

@@ -6,30 +6,32 @@ import {AddTaskForm} from "./AddTaskForm";
 import {TasksList} from "./TasksList";
 
 type TodolistProps = {
+    todolistId: string,
     title: string,
     tasks: Array<TaskType>,
     filter: FilterType,
-    removeTask: (taskId: string) => void,
-    changeFilter: (filter: FilterType) => void,
-    addTask: (title: string) => void,
-    changeTaskStatus: (taskId: string, statusTask: boolean) => void,
+    removeTodolist: (todolistId: string) => void,
+    removeTask: (taskId: string, todolistId: string) => void,
+    changeTodolistFilter: (filter: FilterType, todolistId: string) => void,
+    addTask: (title: string, todolistId: string) => void,
+    changeTaskStatus: (taskId: string, statusTask: boolean, todolistId: string) => void,
 }
 
-export const Todolist = ({title, tasks, removeTask, changeFilter, addTask, changeTaskStatus, filter}: TodolistProps) => {
+export const Todolist = ({todolistId, title, tasks, removeTodolist, removeTask, changeTodolistFilter, addTask, changeTaskStatus, filter}: TodolistProps) => {
     return (
         <div className={'todolist-wrapper'}>
-            <TodolistHeader title={title}/>
-            <AddTaskForm addTask={addTask}/>
-            <TasksList tasks={tasks} removeTask={removeTask} changeTaskStatus={changeTaskStatus}/>
+            <TodolistHeader title={title} todolistId={todolistId} removeTodolist={removeTodolist}/>
+            <AddTaskForm addTask={addTask} todolistId={todolistId}/>
+            <TasksList todolistId={todolistId} tasks={tasks} removeTask={removeTask} changeTaskStatus={changeTaskStatus}/>
             <div className={'btn-block'}>
                 <Button title={"All"}
-                        onClick={() => changeFilter("all")}
+                        onClick={() => changeTodolistFilter("all", todolistId)}
                         style={filter === 'all' ? 'active-filter': 'todo-btn-filter'}/>
                 <Button title={"Active"}
-                        onClick={() => changeFilter("active")}
+                        onClick={() => changeTodolistFilter("active", todolistId)}
                         style={filter === 'active' ? 'active-filter': 'todo-btn-filter'}/>
                 <Button title={"Completed"}
-                        onClick={() => changeFilter("completed")}
+                        onClick={() => changeTodolistFilter("completed", todolistId)}
                         style={filter === 'completed' ? 'active-filter': 'todo-btn-filter'}/>
             </div>
         </div>

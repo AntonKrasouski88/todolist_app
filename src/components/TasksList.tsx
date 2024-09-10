@@ -3,15 +3,17 @@ import {TaskType} from "../App";
 import {Task} from "./Task";
 
 type TasksListProps = {
+    todolistId: string;
     tasks: TaskType[],
-    removeTask: (taskId: string) => void,
-    changeTaskStatus: (taskId: string, statusTask: boolean) => void,
+    removeTask: (taskId: string, todolistId: string) => void,
+    changeTaskStatus: (taskId: string, statusTask: boolean, todolistId: string) => void,
 }
 
-export const TasksList = ({tasks, removeTask, changeTaskStatus}: TasksListProps) => {
+export const TasksList = ({tasks, removeTask, changeTaskStatus, todolistId}: TasksListProps) => {
     //Returns a list of tasks
     const tasksList = tasks.length > 0 ? tasks.map(task => {
-        return <Task taskId={task.id}
+        return <Task todolistId={todolistId}
+                     taskId={task.id}
                      title={task.title}
                      isDone={task.isDone}
                      removeTask={removeTask}
